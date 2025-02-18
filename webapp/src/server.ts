@@ -29,11 +29,9 @@ import { handler } from "./handler";
 // execution model means that only one HTTP request will be handled at a time."
 
 const port = 5000;
-const server = createServer();
+const server = createServer(handler);
 //server.on("request", handler);
-server.listen(port, () => 
-    console.log(`(Event) Server listening on port ${port}`)
-);
+server.listen(port, () => console.log(`(Event) Server listening on port ${port}`));
 // server.on("listening", () => {
-    //console.log(`(Event) Server listening on port ${port}`);
+//console.log(`(Event) Server listening on port ${port}`);
 // });
