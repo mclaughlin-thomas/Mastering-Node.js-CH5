@@ -8,17 +8,20 @@ exports.handler = void 0;
 // this code below omits the configuration object mentioned in server.ts
 // which means that the default types will be used to represent the HTTP 
 // request and response when the handler fcn for the request event is invoked.
+const url_1 = require("url");
 const handler = async (req, resp) => {
-    // Logging request details!
     console.log(`---- HTTP Method: ${req.method},URL: ${req.url}`);
-    console.log(`host: ${req.headers.host}`);
-    console.log(`accept: ${req.headers.accept}`);
-    console.log(`user-agent: ${req.headers["user-agent"]}`);
+    // console.log(`host: ${req.headers.host}`);
+    // console.log(`accept: ${req.headers.accept}`);
+    // console.log(`user-agent: ${req.headers["user-agent"]}`)
+    const parsedURL = new url_1.URL(req.url ?? "", `http://${req.headers.host}`);
+    console.log(`protocol: ${parsedURL.protocol}`);
+    console.log(`hostname: ${parsedURL.hostname}`);
+    console.log(`port: ${parsedURL.port}`);
+    console.log(`pathname: ${parsedURL.pathname}`);
+    parsedURL.searchParams.forEach((val, key) => {
+        console.log(`Search param: ${key}: ${val}`);
+    });
     resp.end("Hello, World");
-    // This example writes out the HTTP method, request url, and three headers:
-    // the host header, which specifies the hostname and port to which the request was sent
-    // the accept header which specifies the formats the client is willing to accept in the 
-    // response
-    // and the user-agent header which identifies the client
 };
 exports.handler = handler;
