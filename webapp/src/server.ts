@@ -30,6 +30,10 @@ import { handler } from "./handler";
 
 const port = 5000;
 const server = createServer(handler);
+// The arguments for the the above fcn are a configuration object
+// and a request-handling function. The config object is used to change
+// the way that requests are received.
+
 //server.on("request", handler);
 server.listen(port, () => console.log(`(Event) Server listening on port ${port}`));
 // server.on("listening", () => {
