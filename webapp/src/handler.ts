@@ -24,4 +24,13 @@ export const handler = async (req: IncomingMessage, resp: ServerResponse) => {
         console.log(`Search param: ${key}: ${val}`)
     });
     resp.end("Hello, World");
+    // try 
+    // http://localhost:5000/myrequest?first=Bob&last=Smith
+    // ---- HTTP Method: GET, URL: /myrequest?first=Bob&last=Smith
+    // protocol: http:
+    // hostname: localhost
+    // port: 5000
+    // pathname: /myrequest
+    // Search param: first: Bob
+    // Search param: last: Smith
 };
