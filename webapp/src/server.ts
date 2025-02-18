@@ -1,8 +1,7 @@
 import { createServer } from "http";
 import { handler } from "./handler";
 
-const port = 5000;
-const server = createServer();
+
 // The createServer fcn in the http module is used to create Server objects
 // These server objects can be used to listen for and process HTTP requests.
 // The server object needs configured before it starts listening for requests
@@ -29,6 +28,8 @@ const server = createServer();
 // triggered each time an HTTP request is received, and the JavaScript
 // execution model means that only one HTTP request will be handled at a time."
 
+const port = 5000;
+const server = createServer();
 server.on("request", handler);
 server.listen(port);
 server.on("listening", () => {
