@@ -12,3 +12,5 @@ In this chapter we go over the Node.js API for creating HTTP servers and explain
 - Detect HTTPS requests
 - Redirect insecure requests
 - Simplify request processing
+
+Pickup at Understanding HTTP requests
