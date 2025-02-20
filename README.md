@@ -76,3 +76,7 @@ There are many options, but the key and cert optiona are enough to get started. 
 Go to https://localhost:5500
 
 Browsers will display warnings for self-signed certs, and you typically have to confirm you want to proceed.
+
+Note! Node.js is still listening for regular HTTP requests on port 5000
+
+Go to http://localhost:5000
