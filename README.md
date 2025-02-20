@@ -41,5 +41,24 @@ URL properties
  - search, returns string containing the entire query portion of the URL
  - searchParams, returns a URLSearchParams object that provides key/val access to the query potion of the URL
 
- 
+## Understanding HTTP Responses
+The purpose of inspecting an HTTP request is to determine what kind of response is required.
 
+## Supporting HTTPS Requests
+Most web applications use HTTPS, where HTTP requests are sent over an encrypted network connection using the TSL/SSL protocol. With HTTPS we can ensure that the request and response cannot be inspected as they traverse public networks.
+
+Supporting SSL requires a certificate that establishes the ID of the server and this is used as the basis for the encryption that secures HTTPS requests. For the next commits we are going to use a self-signed certificate, which is sufficient for development and testing, but should not be used for deployment.
+
+## Creating the self-signed certificate
+The easiest way to create a self-signed certificate is to sue the OpenSSL package. It can be found at https://www.openssl.org but is part of many popular distros. The Git client includes OpenSSL! On windows: C:\Program Files\Git\usr\bin.
+There we can create self-signed certificates without needing to install the OpenSSL package.
+
+To check if you have openSSL, run: openssl version
+
+Let's generate a self-signed certificate. First be in webapp.
+
+openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 3650 -nodes
+
+Then press enter on every prompt to get default value on everything. This is fine for development.
+
+Once the command completes, we will have two new files in webapp directory: the cert.pem file that has the self-signed certificate, and the key.pem file that has the private key for the cert.
