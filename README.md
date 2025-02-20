@@ -80,3 +80,5 @@ Browsers will display warnings for self-signed certs, and you typically have to 
 Note! Node.js is still listening for regular HTTP requests on port 5000
 
 Go to http://localhost:5000
+
+## Detecting HTTPS requests
