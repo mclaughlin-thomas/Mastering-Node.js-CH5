@@ -62,3 +62,17 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 3
 Then press enter on every prompt to get default value on everything. This is fine for development.
 
 Once the command completes, we will have two new files in webapp directory: the cert.pem file that has the self-signed certificate, and the key.pem file that has the private key for the cert.
+
+## Handling HTTPS Requests After Generating Certificate
+The next step is to use the API provided by Node.js to receive HTTPS requests. For this, we edit the server.ts. Modified server.ts. So, the process is largely the same as HTTP.
+
+import { createServer as createHttpsServer } from"https";
+createHttpsServer is an alias
+
+A config object is required to specify the cert files that we created with properties named key and cert. These two properties can be assigned string or Buffer values. To read teh file, we use the readFileSync functions from the fs module: this allows us to read the contents of key.pem and cert.pem files, which produces Buffer values that contain byte arrays. My implementation in server.ts will block main thread, but I think this is okay, using callbacks or promises make the code hideous.
+
+There are many options, but the key and cert optiona are enough to get started. That configuration object that has key and cert is then passed to the createServer fcn that we have aliased as createHttpsServer. Then listen method is called on the result to start listening for HTTPS requests.
+
+Go to https://localhost:5500
+
+Browsers will display warnings for self-signed certs, and you typically have to confirm you want to proceed.
