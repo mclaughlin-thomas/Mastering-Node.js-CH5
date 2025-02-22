@@ -82,3 +82,5 @@ Note! Node.js is still listening for regular HTTP requests on port 5000
 Go to http://localhost:5000
 
 ## Detecting HTTPS requests
+
+Node.js API, uses the IncomingMessage and ServerResponse classes for both HTTP and HTTPS requests. However, it can be useful to know which kind of request is being proceesed so that different responses can be generated.
