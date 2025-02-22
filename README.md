@@ -93,3 +93,20 @@ Go to
 http://localhost:5000 , the response
 sent by the new handler will cause the browser to request
 https://localhost:5500
+
+Redirecting HTTP reqs to an HTTPS URL means that the init communication betweeen the client and server is unencrypted, which means it can be susceptible to Man in the Middle attacks.
+
+All examples in this chapter use HTTP/1.1 which tends to be the defualt in Node.js web app dev.
+
+HTTP/2 is an update to the HTTP protocol thats intended to improve performance.
+
+Node.js provides support for HTTP/2 in the http2 module.
+HTTP/2 is not always the first choice for Node.js projects, even though it is more efficient.
+HTTP/2 benefits applications that have a large volume of reqs, and applications of that suze use a proxy to receive requests and fan them out to multiple mode.js servers. The proxy receives HTTP/2 reqs from clients but communicates with Node.js using HTTP/1.1 res because HTTP/2 features dont have much impact inside the data center.
+
+For apps that do not use a proxy, the volume fo requests is small enough where the efficients of HTTP/2 do not justify the additional complexity that HTTP/2 adds to development, such as requiring encryption for all requests.
+
+Most node.js apps still use HTTP/1.1
+
+## Using Third-Party Enhancements
+s
