@@ -84,3 +84,7 @@ Go to http://localhost:5000
 ## Detecting HTTPS requests
 
 Node.js API, uses the IncomingMessage and ServerResponse classes for both HTTP and HTTPS requests. However, it can be useful to know which kind of request is being proceesed so that different responses can be generated.
+
+## Redirecting Insecure Requests
+
+HTTPS is the norm now and it is common practice to respond to regualr HTTP request w a response that redirects the client to use HTTPS instead. That is what we will now do.

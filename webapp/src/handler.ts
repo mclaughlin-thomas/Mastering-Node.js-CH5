@@ -19,8 +19,14 @@ import { IncomingMessage, ServerResponse } from "http";
 import { TLSSocket } from "tls";
 import { URL } from "url";
 
+//REWRITE isHTTPS & adding redirectionHandler for HTTP to HTTPS redirection
 export const isHttps = (req: IncomingMessage) : boolean => {
     return req.socket instanceof TLSSocket && req.socket.encrypted;
+}
+export const redirectionHandler= (req: IncomingMessage, resp: ServerResponse) => {
+    resp.writeHead(302, {"Location": "https://localhost:5500"});
+    // 302 denotes redirection and sets the Location header to new URL
+    resp.end();
 }
 
 export const handler = (req: IncomingMessage, resp: ServerResponse) => {
