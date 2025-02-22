@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handler = exports.isHttps = void 0;
+exports.handler = exports.redirectionHandler = exports.isHttps = void 0;
 // Useful createServer configuration objects
 // IncomingMessage // represents requests
 // ServerResponse  // represents responses
@@ -16,10 +16,17 @@ exports.handler = exports.isHttps = void 0;
 // different responses can be produced.
 const tls_1 = require("tls");
 const url_1 = require("url");
+//REWRITE isHTTPS & adding redirectionHandler for HTTP to HTTPS redirection
 const isHttps = (req) => {
     return req.socket instanceof tls_1.TLSSocket && req.socket.encrypted;
 };
 exports.isHttps = isHttps;
+const redirectionHandler = (req, resp) => {
+    resp.writeHead(302, { "Location": "https://localhost:5500" });
+    // 302 denotes redirection and sets the Location header to new URL
+    resp.end();
+};
+exports.redirectionHandler = redirectionHandler;
 const handler = (req, resp) => {
     const protocol = (0, exports.isHttps)(req) ? "https" : "http";
     const parsedURL = new url_1.URL(req.url ?? "", `${protocol}://${req.headers.host}`);

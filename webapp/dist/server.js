@@ -2,12 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 //HTTPS
 const http_1 = require("http");
-const handler_1 = require("./handler");
+const handler_1 = require("./handler"); // adding redirectionHandler
 const https_1 = require("https");
 const fs_1 = require("fs");
 const port = 5000;
 const https_port = 5500;
-const server = (0, http_1.createServer)(handler_1.handler);
+const server = (0, http_1.createServer)(handler_1.redirectionHandler);
 server.listen(port, () => console.log(`(Event) Server listening on port ${port}`));
 const httpsConfig = {
     key: (0, fs_1.readFileSync)("key.pem"),

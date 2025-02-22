@@ -88,3 +88,8 @@ Node.js API, uses the IncomingMessage and ServerResponse classes for both HTTP a
 ## Redirecting Insecure Requests
 
 HTTPS is the norm now and it is common practice to respond to regualr HTTP request w a response that redirects the client to use HTTPS instead. That is what we will now do.
+
+Go to
+http://localhost:5000 , the response
+sent by the new handler will cause the browser to request
+https://localhost:5500

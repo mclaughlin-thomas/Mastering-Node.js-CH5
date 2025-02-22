@@ -1,12 +1,12 @@
 //HTTPS
 import { createServer } from "http";
-import { handler } from "./handler";
+import { handler, redirectionHandler } from "./handler"; // adding redirectionHandler
 import { createServer as createHttpsServer } from"https";
 import { readFileSync } from "fs";
 
 const port = 5000;
 const https_port = 5500;
-const server = createServer(handler);
+const server = createServer(redirectionHandler);
 
 server.listen(port,() =>
     console.log(`(Event) Server listening on port ${port}`)
