@@ -1,8 +1,10 @@
 //HTTPS
 import { createServer } from "http";
-import { handler, redirectionHandler } from "./handler"; // adding redirectionHandler
+import { newUrlHandler, defaultHandler, notFoundHandler, redirectionHandler } from "./handler"; // adding redirectionHandler
 import { createServer as createHttpsServer } from"https";
 import { readFileSync } from "fs";
+import express, {Express} from  "express";
+// express fcn invoked to create an Express object.
 
 const port = 5000;
 const https_port = 5500;
@@ -16,7 +18,17 @@ const httpsConfig = {
     key: readFileSync("key.pem"),
     cert: readFileSync("cert.pem")
 };
-const httpsServer = createHttpsServer(httpsConfig,handler);
+
+const expressApp: Express = express();
+expressApp.get("/favicon.ico", notFoundHandler);
+expressApp.get("/newurl", newUrlHandler);
+expressApp.get("*", defaultHandler);
+
+const httpsServer = createHttpsServer(httpsConfig,expressApp);
+// The Express object is also a handler function that can be used
+// with Node.js createServer functions... Express processes all the
+// HTTP requests that Node.js receives and routes them to appropriate
+// handler.
 
 httpsServer.listen(https_port, () =>
     console.log(`HTTPS Server listening on port ${https_port}`)

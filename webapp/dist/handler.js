@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handler = exports.redirectionHandler = exports.isHttps = void 0;
+exports.defaultHandler = exports.newUrlHandler = exports.notFoundHandler = exports.redirectionHandler = exports.isHttps = void 0;
 // Useful createServer configuration objects
 // IncomingMessage // represents requests
 // ServerResponse  // represents responses
@@ -27,30 +27,30 @@ const redirectionHandler = (req, resp) => {
     resp.end();
 };
 exports.redirectionHandler = redirectionHandler;
-const handler = (req, resp) => {
+const notFoundHandler = (req, resp) => {
+    resp.writeHead(404, "Not Found");
+    resp.end();
+};
+exports.notFoundHandler = notFoundHandler;
+const newUrlHandler = (req, resp) => {
+    resp.writeHead(200, "OK");
+    resp.write("Hello, New URL");
+    resp.end();
+};
+exports.newUrlHandler = newUrlHandler;
+const defaultHandler = (req, resp) => {
+    resp.writeHead(200, "OK");
     const protocol = (0, exports.isHttps)(req) ? "https" : "http";
     const parsedURL = new url_1.URL(req.url ?? "", `${protocol}://${req.headers.host}`);
-    if (req.method !== "GET" || parsedURL.pathname == "/favicon.ico") {
-        resp.writeHead(404, "Not Found");
-        resp.end();
-        return;
+    if (!parsedURL.searchParams.has("keyword")) {
+        resp.write(`Hello, ${protocol.toUpperCase()}`);
     }
     else {
-        resp.writeHead(200, "OK");
-        if (parsedURL.pathname == "/newurl") {
-            resp.write("Hello, New URL");
-        }
-        else if (!parsedURL.searchParams.has("keyword")) {
-            resp.write(`Hello, ${protocol.toUpperCase()}`);
-        }
-        else {
-            resp.write(`Hello, ${parsedURL.searchParams.get("keyword")}`);
-        }
-        resp.end();
-        return;
+        resp.write(`Hello, ${parsedURL.searchParams.get("keyword")}`);
     }
+    resp.end();
 };
-exports.handler = handler;
+exports.defaultHandler = defaultHandler;
 // This example generates 3 different responses.
 //http://localhost:5000/favicon.ico ,
 //http://localhost:5000?keyword=World , and

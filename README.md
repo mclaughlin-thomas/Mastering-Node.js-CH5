@@ -127,3 +127,39 @@ Supporting a new URL in the handler.ts file
 This current setup is a complicated. Each new addition makes the code more complex and increases the chance of errors.
 
 Express router can solve this problem..
+It can solve it by separating request matching from generating responses. To do this, we have to refactor the handler code into separate functions that generate responses without the statements that inspect requests
+
+After refactoring, code looks much much cleaner.
+//
+
+get(path, handler)
+This method routes HTTP GET
+requests that match the path to the
+specified handler function.
+
+post(path, handler)
+This method routes HTTP POST
+requests that match the path to the
+specified handler function.
+
+put(path, handler)
+This method routes HTTP PUT
+requests that match the path to the
+specified handler function.
+
+delete(path, handler)
+This method routes HTTP DELETE
+requests that match the path to the
+specified handler function.
+
+all(path, handler)
+This method routes all requests that
+match the path to the specified handler
+function.
+
+use(handler)
+This method adds a middleware
+component, which is able to inspect
+and intercept all requests. Later
+chapters contain examples that use
+middleware.
