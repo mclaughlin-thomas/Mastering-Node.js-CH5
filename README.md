@@ -109,4 +109,21 @@ For apps that do not use a proxy, the volume fo requests is small enough where t
 Most node.js apps still use HTTP/1.1
 
 ## Using Third-Party Enhancements
-s
+One nice thing about js development is there is a huge range of open-source packages that 
+are available and many are built on the Node.js API to simplify request handling.
+
+One of the most popular is Express.
+
+Listing 5.13: Installing the Express package
+npm install express@4.18.2
+npm install --save-dev @types/express@4.17.20
+
+Express has many useful features, but the two most useful are the requests router and
+the enhanced request/response types, which this subsection will go over.
+
+## Using the Express Router
+Supporting a new URL in the handler.ts file
+
+This current setup is a complicated. Each new addition makes the code more complex and increases the chance of errors.
+
+Express router can solve this problem..

@@ -40,7 +40,10 @@ export const handler = (req: IncomingMessage, resp: ServerResponse) => {
     }
     else {
         resp.writeHead(200, "OK");
-        if (!parsedURL.searchParams.has("keyword")) {
+        if (parsedURL.pathname == "/newurl") {
+            resp.write("Hello, New URL");
+        }
+        else if (!parsedURL.searchParams.has("keyword")) {
             resp.write(`Hello, ${protocol.toUpperCase()}`);
         }
         else {
