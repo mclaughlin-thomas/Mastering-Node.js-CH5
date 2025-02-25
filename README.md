@@ -177,3 +177,6 @@ We see now that Express automatically parses the request URL and makes its parts
 
 The Response methods reduce the number of statements required to produce responses.
 The send method for example takes care of setting the response status code, set some useful headers, and calls the end method to tell Node.js that the response is complete.
+
+## Using Express Route Parameters
+d
