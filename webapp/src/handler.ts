@@ -16,39 +16,33 @@ import { IncomingMessage, ServerResponse } from "http";
 // property exists allows HTTPS and HTTP connections to be identified so that
 // different responses can be produced.
 
-import { TLSSocket } from "tls";
-import { URL } from "url";
+// import { TLSSocket } from "tls";
+// import { URL } from "url";
+import {Request, Response} from "express";
 
 //REWRITE isHTTPS & adding redirectionHandler for HTTP to HTTPS redirection
-export const isHttps = (req: IncomingMessage) : boolean => {
-    return req.socket instanceof TLSSocket && req.socket.encrypted;
-}
+// export const isHttps = (req: IncomingMessage) : boolean => {
+//     return req.socket instanceof TLSSocket && req.socket.encrypted;
+// }
 export const redirectionHandler= (req: IncomingMessage, resp: ServerResponse) => {
     resp.writeHead(302, {"Location": "https://localhost:5500"});
     // 302 denotes redirection and sets the Location header to new URL
     resp.end();
 }
 
-export const notFoundHandler= (req: IncomingMessage, resp: ServerResponse) => {
-    resp.writeHead(404, "Not Found");
-    resp.end();
+export const notFoundHandler = (req: Request, resp: Response) => {
+    resp.sendStatus(404);
 }
-export const newUrlHandler= (req: IncomingMessage, resp: ServerResponse) => {
-    resp.writeHead(200, "OK");
-    resp.write("Hello, New URL");
-    resp.end();
+export const newUrlHandler = (req: Request, resp:Response) => {
+    resp.send("Hello, New URL");
 }
-export const defaultHandler= (req: IncomingMessage, resp: ServerResponse) => {
-    resp.writeHead(200, "OK");
-    const protocol = isHttps(req) ? "https" : "http";
-    const parsedURL = new URL(req.url ?? "",`${protocol}://${req.headers.host}`);
-    if (!parsedURL.searchParams.has("keyword")) {
-        resp.write(`Hello, ${protocol.toUpperCase()}`);
+export const defaultHandler = (req: Request, resp:Response) => {
+    if (req.query.keyword) {
+        resp.send(`Hello, ${req.query.keyword}`);
     }
     else {
-    resp.write(`Hello, ${parsedURL.searchParams.get("keyword")}`);
+        resp.send(`Hello, ${req.protocol.toUpperCase()}`);
     }
-    resp.end();
 }
 // This example generates 3 different responses.
 //http://localhost:5000/favicon.ico ,

@@ -163,3 +163,17 @@ component, which is able to inspect
 and intercept all requests. Later
 chapters contain examples that use
 middleware.
+
+## Using The Request and Response Enhancements
+
+Aside from routing, Express can do other things like enhancing the IncomingRequest and ServerResponse objects that are passed to handler functions.
+
+The object that represents the HTTP req is named Request and it extends the IncomingRequest type.
+
+The object that Express uses to represent the HTTP response is named Response and extends the ServerResponse type.
+
+Implementing the enhancements
+We see now that Express automatically parses the request URL and makes its parts accessible through the response properties. Which means I do not have to parse the URL explicitly. The secure property means I can remove the isHTTPs function!
+
+The Response methods reduce the number of statements required to produce responses.
+The send method for example takes care of setting the response status code, set some useful headers, and calls the end method to tell Node.js that the response is complete.
