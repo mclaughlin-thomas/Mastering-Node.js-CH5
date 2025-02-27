@@ -34,7 +34,8 @@ export const notFoundHandler = (req: Request, resp: Response) => {
     resp.sendStatus(404);
 }
 export const newUrlHandler = (req: Request, resp:Response) => {
-    resp.send("Hello, New URL");
+    const msg = req.params.message ?? "(No Message)";
+    resp.send(`Hello, ${msg}`);
 }
 export const defaultHandler = (req: Request, resp:Response) => {
     if (req.query.keyword) {

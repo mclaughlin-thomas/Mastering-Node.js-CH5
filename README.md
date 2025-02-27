@@ -179,4 +179,20 @@ The Response methods reduce the number of statements required to produce respons
 The send method for example takes care of setting the response status code, set some useful headers, and calls the end method to tell Node.js that the response is complete.
 
 ## Using Express Route Parameters
-d
+One extra useful feature that Express provides is specifying route parameters, which
+extracts values from URL paths when matching requests and make them easily accessible
+through the Response.params property
+
+Listing 5.18: Using route parameters in the server.ts file in the src folder
+...
+const expressApp: Express = express();
+expressApp.get("/favicon.ico", notFoundHandler);
+expressApp.get("/newurl/:message?", newUrlHandler); // HERE
+// THE ? denotes this as optional.
+expressApp.get("*", defaultHandler);
+
+URL path /newurl/London , for example, the message parameter will
+be assigned the value London .
+
+Route Params are an effective way to increase the range of URLs that a route can match.
+

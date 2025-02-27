@@ -20,7 +20,7 @@ const httpsConfig = {
 };
 const expressApp = (0, express_1.default)();
 expressApp.get("/favicon.ico", handler_1.notFoundHandler);
-expressApp.get("/newurl", handler_1.newUrlHandler);
+expressApp.get("/newurl/:message?", handler_1.newUrlHandler);
 expressApp.get("*", handler_1.defaultHandler);
 const httpsServer = (0, https_1.createServer)(httpsConfig, expressApp);
 // The Express object is also a handler function that can be used
